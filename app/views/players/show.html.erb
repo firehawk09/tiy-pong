@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @player.name %>
+</p>
+
+<p>
+  <strong>Nickname:</strong>
+  <%= @player.nickname %>
+</p>
+
+<%= link_to 'Delete', @player, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Edit', edit_player_path(@player) %> |
+<%= link_to 'Home', players_path %>
