@@ -1,0 +1,7 @@
+<h1>TIY Houston Table Tennis League</h1>
+
+<% @players.each do |player| %>
+  <%= player.name %>
+<% end %>
+
+<%= link_to  "Join League!", new_player_path %>
