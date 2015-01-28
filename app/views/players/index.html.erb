@@ -1,11 +1,17 @@
 <p><%= notice %></p>
-<% if flash[:show_login_form] %>
-  <%= render "login" %>
+<% if logged_in? %>
+  <%= content_tag :p, "Logged in as #{current_player.login}" %>
 <% end %>
 <h1>TIY Houston Table Tennis League</h1>
 
 <% @players.each do |player| %>
-  <p><%= player.name %> <%= player.login %>   <%= link_to "Edit", edit_player_path(player) %></p>
+  <p><%= player.name %> <%= player.login %></p>
 <% end %>
 
-<%= link_to  "Join League!", new_player_path %>
+<% if logged_in? %>
+  <%= link_to "Edit", edit_player_path(current_player) %> |
+  <%= link_to "Logout", players_logout_path, method: :delete %>
+<% else %>
+  <%= link_to  "Join League!", new_player_path %>
+  <%= render "login" %>
+<% end %>
