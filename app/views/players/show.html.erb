@@ -7,9 +7,11 @@
 
 <p>
   <strong>Nickname:</strong>
-  <%= @player.nickname %>
+  <%= @player.login %>
 </p>
 
-<%= link_to 'Delete', @player, method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Delete', @plpsqayer, method: :delete, data: { confirm: 'Are you sure?' } %>
 <%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Home', players_path %>
+
+<%= @ttt %>
