@@ -10,6 +10,10 @@
   <%= @player.login %>
 </p>
 
-<%= link_to 'Delete', @plpsqayer, method: :delete, data: { confirm: 'Are you sure?' } %>
-<%= link_to 'Edit', edit_player_path(@player) %> |
 <%= link_to 'Home', players_path %>
+<% if logged_in? @player %>
+  | <%= link_to 'Edit', edit_player_path(@player) %> |
+  <%= link_to "Logout", players_logout_path, method: :delete %> |
+  <%= link_to 'Delete', @player, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+

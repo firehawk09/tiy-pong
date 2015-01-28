@@ -13,6 +13,7 @@ class PlayersController < ApplicationController
     @player = Player.new(player_params.merge({ wins: 0, losses: 0, random_token: generate_token }))
 
     if @player.save
+      log_in @player
       redirect_to @player, notice: 'Player was successfully created.'
     else
       render :new
@@ -23,10 +24,8 @@ class PlayersController < ApplicationController
   end
 
   def edit
-    if logged_in?
-      @notice = "You are already logged in"
-    else
-      redirect_to root_url, notice: "You need to be logged in to edit."
+    unless logged_in? @player
+      redirect_to root_url, notice: "Invalid credentials"
     end
   end
 
@@ -43,22 +42,21 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-    @player.destroy
-     redirect_to players_url, notice: 'Post was successfully destroyed.'
+    if @player.destroy
+      redirect_to players_url, notice: 'You were successfully deleted.'
+    else
+      redirect_to players_url, notice: "Deleting error."
+    end
   end
 
   def login
     @player = Player.find_by login: params[:login]
-    notice = ""
+    notice = nil
     if @player
-
-      #if no cookie compare password and set new cookie
       if PasswordDigester.check?(params[:password], @player.password)
         cookies[:random_token] = generate_token
         @player.update_attributes( random_token: cookies[:random_token] )
         log_in(@player)
-        notice = "Logged in with password!"
-      #no password or cookie match
       else
         notice = "Invalid password"
       end
@@ -67,7 +65,7 @@ class PlayersController < ApplicationController
       notice = "Invalid login"
     end
 
-    redirect_to @player, notice: notice
+    redirect_to root_path, notice: notice
   end
 
   def logout

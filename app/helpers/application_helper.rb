@@ -7,8 +7,8 @@ module ApplicationHelper
     @current_player ||= Player.find_by(id: session[:player_id])
   end
 
-  def logged_in?
-    !current_player.nil?
+  def logged_in?(player = current_player)
+    !current_player.nil? && (player == current_player)
   end
 
   def log_out
