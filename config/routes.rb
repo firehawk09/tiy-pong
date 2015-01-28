@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :players
 
   root 'players#index'
+  post 'players/login'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

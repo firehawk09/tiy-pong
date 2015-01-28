@@ -11,7 +11,6 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new(player_params.merge({ wins: 0, losses: 0 }))
-    @ttt = player_params
 
     if @player.save
       redirect_to @player, notice: 'Player was successfully created.'
@@ -24,6 +23,12 @@ class PlayersController < ApplicationController
   end
 
   def edit
+    if logged_in?
+      render :edit
+    else
+      @show_login_form = true
+      redirect_to root_url, notice: "You need to be logged in to edit.", flash: { show_login_form: true }
+    end
   end
 
   def update
@@ -43,6 +48,24 @@ class PlayersController < ApplicationController
      redirect_to players_url, notice: 'Post was successfully destroyed.'
   end
 
+  def login
+    @player = Player.find_by login: params[:login]
+    if @player
+      #if player's cookie matches db cookie log in
+      if true
+      #if no cookie compare password and set new cookie
+      elsif PasswordDigester.check?(params[:password], @player.password)
+
+      #no password or cookie match
+      else
+
+      end
+
+    end
+
+    redirect_to root_url
+  end
+
   private
 
     def player_params
@@ -52,6 +75,14 @@ class PlayersController < ApplicationController
 
     def set_player
       @player = Player.find(params[:id])
+    end
+
+    def logged_in?
+      if session[:logged] == true
+        true
+      else
+        false
+      end
     end
 
 end

@@ -1,0 +1,5 @@
+<%= form_tag("/players/login", method: "post") do %>
+  Login: <%= text_field_tag(:login) %><br>
+  Password: <%= text_field_tag(:password) %><br>
+  <%= submit_tag("Log in") %>
+<% end %>
