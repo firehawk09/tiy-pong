@@ -1,6 +1,6 @@
 require 'bcrypt'
 
-class PasswordDigester::PlayersController
+class PlayersController::PasswordDigester
   def self.encrypt(password)
     BCrypt::Password.create(password)
   end
