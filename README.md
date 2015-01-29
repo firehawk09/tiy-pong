@@ -1,5 +1,3 @@
-== README
-
 Hi frontend!
 
 Help me make this site less ugly by forking this!
@@ -15,7 +13,7 @@ Help me make this site less ugly by forking this!
 ```
 <div class="awesome">
  <%= rubycode %>
- </div>
+</div>
 ```
 * You can add add classes to any of the link_to or ***_tag by adding ", class: "classname" ie
 

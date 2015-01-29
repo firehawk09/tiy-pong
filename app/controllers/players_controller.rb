@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
   end
 
   def create
-    @player = Player.new(player_params.merge({ wins: 0, losses: 0, random_token: generate_token }))
+    @player = Player.new( Player.merge_default_parameters( player_params ) )
 
     if @player.save
       log_in @player
@@ -30,11 +30,7 @@ class PlayersController < ApplicationController
   end
 
   def update
-    if @player.update_attributes(
-                  name: player_params[:name],
-                  login: player_params[:login],
-                  password: PasswordDigester.encrypt(player_params[:password])
-                  )
+    if @player.update_attributes_with_encrypted_password( player_params )
       redirect_to @player, notice: "Player was successfully updated"
     else
       render :edit
@@ -55,18 +51,16 @@ class PlayersController < ApplicationController
     @player = Player.find_by login: params[:login]
     notice = nil
     if @player
-      if PasswordDigester.check?(params[:password], @player.password)
-        cookies[:random_token] = generate_token
+      if @player.correct_password?( params[:password] )
+        cookies[:random_token] = Player::PasswordDigester.generate_token
         @player.update_attributes( random_token: cookies[:random_token] )
         log_in(@player)
       else
         notice = "Invalid password"
       end
-
     else
       notice = "Invalid login"
     end
-
     redirect_to root_path, notice: notice
   end
 
@@ -78,21 +72,16 @@ class PlayersController < ApplicationController
   private
 
     def player_params
-      params[:player][:password] = PasswordDigester.encrypt(params[:player][:password])
+      params[:player][:password] =
+        Player::PasswordDigester.encrypt(params[:player][:password])
       params.require(:player).permit(:name, :login, :password)
     end
 
     def set_player
       @player = Player.find(params[:id])
     end
-
-      #if player's cookie matches db cookie log in
-      # if @player.random_token == cookies[:random_token]
-      #   log_in(@player)
-      # end
-
-    def generate_token
-      PasswordDigester.encrypt( (0..100).to_a.sample(10).join )
-    end
-
+    #if player's cookie matches db cookie log in
+    # if @player.random_token == cookies[:random_token]
+    #   log_in(@player)
+    # end
 end
