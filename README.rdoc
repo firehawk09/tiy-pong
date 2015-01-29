@@ -22,5 +22,6 @@ Help me make this site less ugly by forking this!
 ```html
 <%= link_to "new", path %>
 <%= link_to "new", path, class: "awesome" %>
+```
 
 
