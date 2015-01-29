@@ -42,10 +42,12 @@ class PlayersController < ApplicationController
   end
 
   def destroy
-    if @player.destroy
-      redirect_to players_url, notice: 'You were successfully deleted.'
-    else
-      redirect_to players_url, notice: "Deleting error."
+    unless logged_in @player
+      if @player.destroy
+        redirect_to players_url, notice: 'You were successfully deleted.'
+      else
+        redirect_to players_url, notice: "Deleting error."
+      end
     end
   end
 
