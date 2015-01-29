@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  player1_id: 1
+  player2_id: 1
+  player1_score: 1
+  player2_score: 1
+  winner_player_id: 1
+  date_played: 2015-01-29
+
+two:
+  player1_id: 1
+  player2_id: 1
+  player1_score: 1
+  player2_score: 1
+  winner_player_id: 1
+  date_played: 2015-01-29

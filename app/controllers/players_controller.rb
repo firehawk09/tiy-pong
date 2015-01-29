@@ -11,7 +11,6 @@ class PlayersController < ApplicationController
 
   def create
     @player = Player.new( Player.merge_default_parameters( player_params ) )
-
     if @player.save
       log_in @player
       redirect_to @player, notice: 'Player was successfully created.'

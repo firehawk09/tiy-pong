@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :games
+
   root 'players#index'
   post 'players/login'
   delete 'players/logout'
