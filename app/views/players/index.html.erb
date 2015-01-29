@@ -3,16 +3,30 @@
 <% end %>
 <% if logged_in? %>
   <%= content_tag :p, "Logged in as #{current_player.login}" %>
-<% end %>
-
-<% @players.each do |player| %>
-  <p><%= player.name %> <%= player.login %></p>
-<% end %>
-
-<% if logged_in? %>
-  <%= link_to "Edit", edit_player_path(current_player) %> |
-  <%= link_to "Logout", players_logout_path, method: :delete %>
 <% else %>
-  <%= link_to  "Join League!", new_player_path %>
-  <%= render "login" %>
+  <div class="center">
+    <%= link_to  "Join League!", new_player_path %>
+  </div>
 <% end %>
+
+<table class="table">
+  <tr>
+    <th>Player</th>
+    <th>Nickname</th>
+  </tr>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= player.name %></td>
+      <td><%= player.login %></td>
+    </tr>
+<% end %>
+</table>
+
+<div class="center">
+  <% if logged_in? %>
+    <%= link_to "Your page", player_path(current_player) %> |
+    <%= link_to "Logout", players_logout_path, method: :delete %>
+  <% else %>
+    <%= render "login" %>
+  <% end %>
+</div>

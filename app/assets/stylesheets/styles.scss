@@ -1,9 +1,37 @@
+body {
+  font-family: 'Lato', sans-serif !important;
+  background-color: #bed7c7;
+  font-size: 2em;
+}
+
+tr:nth-child(even) {
+    background: white;
+}
+
 header {
   background: black;
   height: 100px;
+  padding: 4%;
 
   h1{
     color: white;
-    font-size: 2em;
+    font-size: 1.5em;
+    margin: 0;
+    text-align: center;
   }
 }
+
+
+.center {
+  text-align: center;
+}
+
+@media(min-width: 900px) {
+  header {
+    padding: 1%;
+    h1 {
+      font-size: 3em;
+    }
+  }
+}
+
