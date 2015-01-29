@@ -1,28 +1,26 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hi frontend!
 
-Things you may want to cover:
+Help me make this site less ugly by forking this!
 
-* Ruby version
+* Add styles to app/stylesheets/styles.scss
 
-* System dependencies
+* Add html to any of the html files in app/views/players
 
-* Configuration
+* Bootstrap is included
 
-* Database creation
+* The <% .. %> is just ruby code, you can wrap them in html tags to style ie
 
-* Database initialization
+```html
+<div class="awesome">
+ <%= rubycode %>
+ </div>
+```
+* You can add add classes to any of the link_to or ***_tag by adding ", class: "classname" ie
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```html
+<%= link_to "new", path %>
+<%= link_to "new", path, class: "awesome" %>
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
