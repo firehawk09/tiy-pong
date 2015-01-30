@@ -1,5 +1,17 @@
 <%= form_tag("/players/login", method: "post", class: "login") do %>
-  Login: <%= text_field_tag(:login) %><br>
-  Password: <%= text_field_tag(:password) %><br>
-  <%= submit_tag("Log in") %>
+<div class="entry">
+    <div class="textInput">
+        <div class="loginText">
+            Login:
+        </div>
+        <%= text_field_tag :login, nil, class: "loginBox" %><br>
+    </div>
+    <div class="textInput">
+        <div class="passwordText">
+            Password:
+        </div>
+        <%= text_field_tag(:password, nil, class: "passwordBox") %><br>
+        <%= submit_tag("Log in") %>
+    </div>
+</div>
 <% end %>
