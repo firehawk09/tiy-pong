@@ -35,3 +35,47 @@ header {
   }
 }
 
+
+//========================================================================================
+//                                    Front End Work
+//========================================================================================
+
+
+
+.header {
+    .tiyLogo {
+        max-height: 100px;
+        position: absolute;
+        top: 0%;
+        left: 4%;
+    }
+    .teamusa {
+        max-height: 100px;
+        position: absolute;
+        top: 1%;
+        right: 5%;
+    }
+}
+.entry {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    width: 22em;
+    .loginText {
+        // color: blue;
+        position: absolute;
+        left: 13%;
+    }
+    .passwordText {
+        // color: blue;
+        position: absolute;
+        left: 4%;
+    }
+    .loginBox {
+        left: 36%;
+    }
+    .passwordBox {
+        position: relative;
+    }
+
+}
