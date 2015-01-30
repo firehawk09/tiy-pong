@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+players = Player.all
+Game.delete_all
+
+list_of_games = PlayerMatch.create_matchups(players)
+list_of_games.each { |game| Game.create(player1_id: game[0], player2_id: game[1] )}
