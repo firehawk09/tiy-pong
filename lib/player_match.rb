@@ -44,7 +44,6 @@ class PlayerMatch
     end
 
     matchup_list_with_week = []
-
     matchup_list.each do |matchup|
       break_me = false
       player1 = matchup[0]
@@ -53,12 +52,12 @@ class PlayerMatch
       p1_available_weeks = player_match_weeks[player1]
       p2_available_weeks = player_match_weeks[player2]
 
-      (0..p1_available_weeks.size-1).each do |index|
-        (0..p2_available_weeks.size-1).each do |index|
-          if p1_available_weeks[index] == p2_available_weeks.first
-            matchup_list_with_week << [player1, player2, p1_available_weeks[index]]
-            p1_available_weeks.delete_at(index)
-            p2_available_weeks.shift
+      (0..p1_available_weeks.size-1).each do |index1|
+        (0..p2_available_weeks.size-1).each do |index2|
+          if p1_available_weeks[index1] == p2_available_weeks[index2]
+            matchup_list_with_week << [player1, player2, p1_available_weeks[index1]]
+            p1_available_weeks.delete_at(index1)
+            p2_available_weeks.delete_at(index2)
             # binding.pry
             break_me = true
             break
