@@ -2,7 +2,7 @@ class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
 
   def index
-    @players = Player.all
+    @players = Player.all.sort { |p1,p2| p2.wins <=> p1.wins }
   end
 
   def new

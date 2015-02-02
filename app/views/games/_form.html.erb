@@ -1,41 +1,29 @@
-<%= form_for(@game) do |f| %>
-  <% if @game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<% index = 1 %>
+<% @games.each do |game| %>
+  <%= form_for(game) do |f| %>
+    <h3>Game <%= index %></h3>
+    <% if @game.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
 
-      <ul>
-      <% @game.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label "#{Player.find_by( id: @game.player1_id).login}'s score" %><br>
+      <%= f.number_field :player1_score %>
     </div>
+    <div class="field">
+      <%= f.label "#{Player.find_by( id: @game.player2_id).login}'s score" %><br>
+      <%= f.number_field :player2_score %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <% index += 1 %>
   <% end %>
-
-  <div class="field">
-    <%= f.label :player1_id %><br>
-    <%= f.number_field :player1_id %>
-  </div>
-  <div class="field">
-    <%= f.label :player2_id %><br>
-    <%= f.number_field :player2_id %>
-  </div>
-  <div class="field">
-    <%= f.label :player1_score %><br>
-    <%= f.number_field :player1_score %>
-  </div>
-  <div class="field">
-    <%= f.label :player2_score %><br>
-    <%= f.number_field :player2_score %>
-  </div>
-  <div class="field">
-    <%= f.label :winner_player_id %><br>
-    <%= f.number_field :winner_player_id %>
-  </div>
-  <div class="field">
-    <%= f.label :date_played %><br>
-    <%= f.date_select :date_played %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
