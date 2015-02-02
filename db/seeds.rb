@@ -11,5 +11,7 @@ Game.delete_all
 
 list_of_games = PlayerMatch.create_matchups(players)
 list_of_games.each do |game|
-  Game.create(player1_id: game[0], player2_id: game[1], week: game[2] )
+  Game.create(player1_id: game[0], player2_id: game[1], week: game[2], player1_score: 0, player2_score: 0 )
+  Game.create(player1_id: game[0], player2_id: game[1], week: game[2], player1_score: 0, player2_score: 0 )
+  Game.create(player1_id: game[0], player2_id: game[1], week: game[2], player1_score: 0, player2_score: 0 )
 end
