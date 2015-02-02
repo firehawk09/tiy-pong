@@ -10,17 +10,25 @@
       <th>Player 2</th>
       <th>Player1 score</th>
       <th>Player2 score</th>
+      <th colspan=1></th>
     </tr>
   </thead>
 
   <tbody>
     <% @games.each do |game| %>
+      <% player1 = Player.find_by( id: game.player1_id ) %>
+      <% player2 = Player.find_by( id: game.player2_id ) %>
       <tr>
         <td><%= game.week %></td>
-        <td><%= Player.find_by( id: game.player1_id ).login %></td>
-        <td><%= Player.find_by( id: game.player2_id ).login %></td>
+        <td><%= player1.login %></td>
+        <td><%= player2.login %></td>
         <td><%= game.player1_score %></td>
         <td><%= game.player2_score %></td>
+        <% if logged_in?(player1) || logged_in?(player2) %>
+          <td><%= link_to "Report score", edit_game_path(game) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
