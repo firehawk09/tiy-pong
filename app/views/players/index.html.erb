@@ -2,11 +2,13 @@
   <%= content_tag :p, notice %>
 <% end %>
 <% if logged_in? %>
-  <%= content_tag :p, "Logged in as #{current_player.login}" %>
-<% else %>
-  <div class="center">
-    <%= link_to  "Join League!", new_player_path %>
+  <div>
+    Logged in as <%= current_player.login %>.
+    <span class="nav">
+      <%= link_to "View Games", games_path %>
+    </span>
   </div>
+
 <% end %>
 
 <table class="table">
@@ -29,8 +31,6 @@
 <div class="center">
   <% if logged_in? %>
     <%= link_to "Your page", player_path(current_player) %> |
-    <%= link_to "Your games", root_path %>
-    <%= link_to "Report game", new_game_path %> |
     <%= link_to "Logout", players_logout_path, method: :delete %>
   <% else %>
     <%= render "login" %>

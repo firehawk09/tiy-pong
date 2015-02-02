@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all.sort { |game1,game2| game1.week <=> game2.week }
   end
 
   # GET /games/1
