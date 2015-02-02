@@ -4,7 +4,8 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = Game.all.sort { |game1,game2| game1.week <=> game2.week }
+    @games.uniq! { |game| "week=#{game.week}&p1=#{game.player1_id}&p2=#{game.player2_id}"}
   end
 
   # GET /games/1
@@ -19,22 +20,16 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
+    #gets all 3 games
+    @games = Game.where(week: @game.week,
+      player2_id: @game.player2_id,
+      player1_id: @game.player1_id)
   end
 
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
-
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to games_path
   end
 
   # PATCH/PUT /games/1
@@ -42,7 +37,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+        format.html { redirect_to edit_game_path }
         format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit }
@@ -54,11 +49,7 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    @game.destroy
-    respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to games_path
   end
 
   private

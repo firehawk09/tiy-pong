@@ -1,23 +1,22 @@
 <% if notice %>
   <%= content_tag :p, notice %>
 <% end %>
-<% if logged_in? %>
-  <%= content_tag :p, "Logged in as #{current_player.login}" %>
-<% else %>
-  <div class="center">
-    <%= link_to  "Join League!", new_player_path %>
-  </div>
-<% end %>
+
+<h1>Standings</h1>
 
 <table class="table">
   <tr>
     <th>Player</th>
     <th>Nickname</th>
+    <th>Games Won</th>
+    <th>Games Lost</th>
   </tr>
   <% @players.each do |player| %>
     <tr>
       <td><%= player.name %></td>
       <td><%= player.login %></td>
+      <td><%= player.wins %></td>
+      <td><%= player.losses %></td>
     </tr>
 <% end %>
 </table>

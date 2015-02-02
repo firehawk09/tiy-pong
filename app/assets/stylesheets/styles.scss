@@ -26,6 +26,12 @@ header {
   text-align: center;
 }
 
+.nav {
+  display: inline-block;
+  position: absolute;
+  right: 0;
+}
+
 @media(min-width: 900px) {
   header {
     padding: 1%;
